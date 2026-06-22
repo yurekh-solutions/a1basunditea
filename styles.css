@@ -349,12 +349,7 @@ h1, h2, h3, h4 {
   z-index: 0;
 }
 
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: linear-gradient(135deg, rgba(44,24,16,0.72) 0%, rgba(26,60,42,0.62) 50%, rgba(44,24,16,0.72) 100%);
-}
+
 
 /* Hide Gemini Icon in Video - Bottom Right Circle */
 .gemini-hide-overlay {
@@ -2736,6 +2731,7 @@ section { padding: 90px 0; position: relative; }
 
   /* Hero gemini hide overlay */
   .gemini-hide-overlay { width: 48px; height: 48px; }
+  .gemini-hide-corner { width: 120px; height: 70px; }
 }
 
 /* === SMALL MOBILE: max 480px === */
@@ -2841,4 +2837,8 @@ section { padding: 90px 0; position: relative; }
 
   /* Map */
   .map-container { height: 220px; }
+
+  /* Gemini hide - smaller on small mobile */
+  .gemini-hide-overlay { width: 40px; height: 40px; }
+  .gemini-hide-corner { width: 100px; height: 60px; }
 }
