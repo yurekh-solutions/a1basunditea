@@ -157,8 +157,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const parallaxElements = document.querySelectorAll('.hero-video');
     
     parallaxElements.forEach(el => {
-      const speed = 0.5;
-      el.style.transform = `translate(-50%, calc(-50% + ${scrolled * speed}px))`;
+      const speed = 0.3;
+      el.style.transform = `translateY(${scrolled * speed}px)`;
     });
   });
 
