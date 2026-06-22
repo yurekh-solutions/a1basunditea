@@ -46,7 +46,7 @@
   --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-html { scroll-behavior: smooth; font-size: 16px; height: 100%; }
+html { scroll-behavior: smooth; font-size: 16px; height: 100%; overflow-x: hidden; }
 
 body {
   font-family: 'Poppins', sans-serif;
@@ -63,6 +63,8 @@ h1, h2, h3, h4 {
   letter-spacing: -0.02em;
   line-height: 1.15;
 }
+
+img, video { max-width: 100%; height: auto; }
 
 /* ===== ANIMATIONS ===== */
 @keyframes fadeInUp {
@@ -124,6 +126,12 @@ h1, h2, h3, h4 {
 /* Reveal-on-scroll */
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s ease, transform 0.8s ease; }
 .reveal.in { opacity: 1; transform: translateY(0); }
+
+/* No-JS fallback: ensure content is visible if JS fails */
+@supports (animation-fill-mode: both) {
+  .reveal { animation: fadeInUp 0.8s ease-out 1.5s both; }
+  .reveal.in { animation: none; }
+}
 
 /* Shimmer text */
 .text-shimmer {
@@ -217,7 +225,7 @@ h1, h2, h3, h4 {
 }
 .top-bar-logo img {
   height: 40px; 
-  margin-left: 120px;
+  margin-left: 0;
   width: auto;
   border-radius: 6px;
   object-fit: contain;
@@ -340,25 +348,24 @@ h1, h2, h3, h4 {
 
 /* ===== HERO SECTION ===== */
 .hero {
-  height: 100dvh !important;
-  min-height: 100dvh !important;
-  min-height: 100vh !important; 
-  display: flex !important; 
+  min-height: 100dvh;
+  min-height: 100vh; 
+  display: flex; 
   align-items: center;
-  padding: 140px 24px 80px !important;
+  padding: 140px 24px 80px;
   position: relative; 
   overflow: hidden;
-  background: #1a1008;
+  background: linear-gradient(135deg, #1a1008 0%, #2c1810 50%, #1a3c2a 100%);
 }
 
 .hero-video {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
-  min-width: 100vw;
-  min-height: 100vh;
+  width: 100%;
+  height: 100%;
+  min-width: 100%;
+  min-height: 100%;
   object-fit: cover;
   z-index: 0;
   pointer-events: none;
@@ -636,7 +643,7 @@ section { padding: 90px 0; position: relative; }
 
 /* ===== WELCOME ===== */
 .welcome-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)); gap: 40px; align-items: center;
 }
 
 .welcome-text { padding: 36px; }
@@ -678,7 +685,7 @@ section { padding: 90px 0; position: relative; }
 
 /* ===== FEATURES ===== */
 .features-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr)); gap: 24px;
 }
 
 .feature-card {
@@ -710,7 +717,7 @@ section { padding: 90px 0; position: relative; }
 
 /* ===== PRODUCTS ===== */
 .products-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 30px;
   max-width: 750px; margin: 0 auto;
 }
 
@@ -973,7 +980,7 @@ section { padding: 90px 0; position: relative; }
 
 /* ===== GALLERY ===== */
 .gallery-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 18px;
 }
 
 .gallery-grid img {
@@ -988,7 +995,7 @@ section { padding: 90px 0; position: relative; }
 /* ===== SHOP OWNER REVIEWS ===== */
 .reviews-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
   gap: 24px;
   max-width: 700px;
   margin: 0 auto;
@@ -1035,7 +1042,7 @@ section { padding: 90px 0; position: relative; }
 /* ===== STATS GRID (dark section) ===== */
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
   gap: 20px;
 }
 
@@ -1061,14 +1068,14 @@ section { padding: 90px 0; position: relative; }
 /* ===== PROCESS GRID (tea making) ===== */
 .process-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
   gap: 20px;
 }
 
 /* ===== CERTIFICATION GRID ===== */
 .cert-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
   gap: 20px;
   max-width: 860px;
   margin: 0 auto;
@@ -1120,6 +1127,10 @@ section { padding: 90px 0; position: relative; }
 
 @media (max-width: 900px) {
   .video-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 500px) {
+  .video-grid { grid-template-columns: 1fr; }
 }
 
 .video-wrapper {
@@ -1257,7 +1268,7 @@ section { padding: 90px 0; position: relative; }
 /* ===== QUICK CONTACT CARDS ===== */
 .quick-contact-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
   gap: 22px;
 }
 
@@ -1448,7 +1459,7 @@ section { padding: 90px 0; position: relative; }
 
 /* ===== CONTACT ===== */
 .contact-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 40px;
 }
 
 .contact-form { padding: 36px; background: var(--white); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); }
@@ -2614,9 +2625,10 @@ section { padding: 90px 0; position: relative; }
   /* Hero */
   .hero { 
     min-height: 100vh;
+    min-height: 100dvh;
     padding: 120px 0 50px;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
   }
   .hero-inner { 
     padding-left: 20px; 
@@ -2682,9 +2694,6 @@ section { padding: 90px 0; position: relative; }
   .gallery-grid img { height: 160px; }
 
   .video-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
-  @media (max-width: 500px) {
-    .video-grid { grid-template-columns: 1fr; }
-  }
 
   .reviews-grid { grid-template-columns: 1fr; max-width: 100%; gap: 16px; }
   .review-card { padding: 16px; }
@@ -2820,8 +2829,9 @@ section { padding: 90px 0; position: relative; }
   .hero { 
     padding: 110px 0 36px; 
     min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
   }
   .hero-inner { 
     padding-left: 16px; 
@@ -2927,4 +2937,121 @@ section { padding: 90px 0; position: relative; }
   /* Gemini hide - smaller on small mobile */
   .gemini-hide-overlay { width: 40px; height: 40px; }
   .gemini-hide-corner { width: 100px; height: 60px; }
+}
+
+/* === EXTRA SMALL MOBILE: max 360px (e.g. iPhone SE, Galaxy Fold) === */
+@media (max-width: 360px) {
+  html { font-size: 13.5px; }
+  .container { padding: 0 10px; }
+  section { padding: 36px 0; }
+  .section-title { margin-bottom: 22px; }
+
+  /* Top bar */
+  .top-bar { padding: 4px 8px; min-height: 26px; }
+  .top-bar-promo .promo-en { font-size: 0.6rem; }
+  .top-bar-social { gap: 4px; }
+  .top-bar-social a { width: 20px; height: 20px; }
+  .top-bar-social a svg { width: 11px; height: 11px; }
+
+  /* Navbar */
+  .nav-inner { height: 52px; padding: 0 10px; }
+  .nav-logo img { height: 38px; }
+  .logo-main { font-size: 1.1rem; }
+  .logo-sub { font-size: 0.45rem; }
+
+  /* Hero */
+  .hero { padding: 100px 0 30px; }
+  .hero-inner { padding-left: 12px; padding-right: 12px; }
+  .hero h1 { font-size: clamp(1.4rem, 8vw, 1.9rem); }
+  .hero-badge { padding: 6px 12px; font-size: 0.6rem; margin-bottom: 10px; }
+  .hero p { font-size: 0.88rem; margin-bottom: 16px; }
+  .hero-stats { grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; padding-top: 14px; }
+  .hero-stat-value { font-size: 1.15rem; }
+  .hero-stat-label { font-size: 0.7rem; }
+  .hero .btn-group .btn { padding: 11px 16px; font-size: 0.85rem; }
+
+  /* Page header */
+  .page-header { padding: 90px 10px 36px; }
+  .page-header h1 { font-size: clamp(1.2rem, 8vw, 1.7rem); }
+
+  /* Grids - force single column */
+  .stats-grid { grid-template-columns: 1fr; }
+  .process-grid { grid-template-columns: 1fr; }
+  .cert-grid { grid-template-columns: 1fr; }
+  .grid-2col { grid-template-columns: 1fr; }
+  .grid-3col { grid-template-columns: 1fr; }
+  .gallery-grid { grid-template-columns: 1fr; }
+  .video-grid { grid-template-columns: 1fr; }
+  .quick-contact-grid { grid-template-columns: 1fr; }
+  .features-grid { grid-template-columns: 1fr; }
+  .reviews-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; gap: 16px; padding: 0 10px; }
+  .footer-logo-col { grid-column: span 1; }
+  .cert-box { padding: 18px 12px; margin: 0; }
+
+  /* Footer */
+  .footer { padding: 32px 0 0; }
+  .footer-legal-bar { flex-direction: column; align-items: center; gap: 8px; padding: 10px 12px; }
+  .footer-legal-bar a { font-size: 0.82rem; }
+
+  /* Forms & cards */
+  .contact-form, .contact-info { padding: 18px 14px; }
+  .checkout-billing, .checkout-order { padding: 14px 12px; }
+  .newsletter-card { padding: 24px 14px; }
+  .newsletter-card h2 { font-size: 1.1rem; }
+  .story-content { padding: 18px 14px; }
+  .faq-question { padding: 12px 14px; font-size: 0.85rem; }
+  .faq-item.open .faq-answer { padding: 0 14px 14px; }
+  .benefit-item { padding: 12px 14px; gap: 10px; }
+  .order-modal-content { padding: 30px 18px; }
+
+  /* Buttons */
+  .btn { padding: 11px 18px; font-size: 0.88rem; }
+  .gallery-filter-btn { padding: 7px 14px; font-size: 0.8rem; }
+
+  /* Map */
+  .map-container { height: 180px; }
+
+  /* Product detail */
+  .product-detail-img { padding: 12px; }
+  .product-detail-price { font-size: 1.9rem; }
+  .pd-tab-btn { flex: none; min-width: 100%; font-size: 0.78rem; }
+
+  /* Tagline */
+  .tagline-section { padding: 28px 10px; }
+  .tagline-section blockquote { font-size: 0.92rem; }
+
+  /* Hero overlays */
+  .gemini-hide-overlay { display: none; }
+  .gemini-hide-corner { width: 80px; height: 50px; }
+  .hero-whatsapp-btn { width: 42px; height: 42px; right: 8px; bottom: 50px; }
+  .hero-whatsapp-btn svg { width: 22px; height: 22px; }
+  .whatsapp-float { width: 46px; height: 46px; bottom: 14px; right: 12px; }
+  .whatsapp-float svg { width: 24px; height: 24px; }
+}
+
+/* ===== NO-JS FALLBACK: prevent blank screen if JavaScript fails ===== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal, .fade-in, .fade-in-left, .fade-in-right, .scale-in, .stagger-children > * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Force visibility after 2 seconds even if JS doesn't fire */
+@keyframes force-visible {
+  to { opacity: 1; transform: none; }
+}
+
+.reveal,
+.fade-in,
+.fade-in-left,
+.fade-in-right,
+.scale-in {
+  animation: force-visible 0.01s ease 2s forwards;
 }
