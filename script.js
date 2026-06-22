@@ -17,6 +17,40 @@ document.addEventListener('DOMContentLoaded', () => {
   const animatedElements = document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .scale-in, .reveal, .stagger-children');
   animatedElements.forEach(el => observer.observe(el));
 
+  // ===== HERO VIDEO AUTOPLAY FIX =====
+  const heroVideo = document.querySelector('.hero-video');
+  if (heroVideo) {
+    // Try to play immediately
+    const playPromise = heroVideo.play();
+    
+    if (playPromise !== undefined) {
+      playPromise.then(() => {
+        // Video is playing
+        console.log('Hero video playing');
+      }).catch(error => {
+        // Autoplay was prevented, try on first user interaction
+        console.log('Autoplay blocked, will try on interaction');
+        
+        const tryPlay = () => {
+          heroVideo.play().then(() => {
+            document.removeEventListener('click', tryPlay);
+            document.removeEventListener('touchstart', tryPlay);
+            document.removeEventListener('scroll', tryPlay);
+          }).catch(() => {});
+        };
+        
+        document.addEventListener('click', tryPlay, { once: true });
+        document.addEventListener('touchstart', tryPlay, { once: true });
+        document.addEventListener('scroll', tryPlay, { once: true });
+      });
+    }
+    
+    // Handle video errors
+    heroVideo.addEventListener('error', (e) => {
+      console.error('Video error:', e);
+    });
+  }
+
   // ===== NAVBAR SCROLL EFFECT =====
   const navbar = document.getElementById('navbar');
   let lastScroll = 0;

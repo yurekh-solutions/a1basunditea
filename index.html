@@ -96,41 +96,95 @@
   <div class="nav-overlay" id="navOverlay"></div>
 
   <!-- HERO -->
-  <section class="hero">
-    <video class="hero-video" autoplay muted loop playsinline>
-      <source src="chaha.mp4" type="video/mp4">
+ <section class="hero relative min-h-screen w-full overflow-hidden">
+
+    <!-- Background Video -->
+    <video
+        autoplay
+        muted
+        loop
+        playsinline
+        class="absolute inset-0 w-full h-full object-cover"
+    >
+        <source src="chaha.mp4" type="video/mp4">
     </video>
-    <div class="hero-overlay"></div>
+
+    <!-- Dark Overlay -->
+    <div class="absolute inset-0 bg-black/50"></div>
+
     <!-- Hide Gemini Icon Overlay -->
     <div class="gemini-hide-overlay"></div>
+
     <!-- Hero Content -->
-    <div class="hero-inner">
-      <div class="hero-content animate-fade-up">
-        <span class="hero-badge" data-mr="इम्युनिटी बूस्टर • मूड चेंजर" data-en="Immunity Booster • Mood Changer">इम्युनिटी बूस्टर • मूड चेंजर</span>
-        <h1 data-mr="A1 बासुंदी टी" data-en="A1 Basundi Tea">A1 बासुंदी टी</h1>
-        <p class="hero-marathi" data-mr="इम्युनिटी बूस्टर आणि मूड चेंजर टी... A1 बसुंदी टी!" data-en="Immunity Booster and Mood Changer Tea... A1 Basundi Tea!">इम्युनिटी बूस्टर आणि मूड चेंजर टी... A1 बसुंदी टी!</p>
-        <p data-mr="शुद्ध, नैसर्गिक आणि प्रीमियम क्वालिटी चहा. महाराष्ट्र आणि भारतभर उपलब्ध." data-en="Pure, natural and premium quality tea. Available across Maharashtra and India.">शुद्ध, नैसर्गिक आणि प्रीमियम क्वालिटी चहा. महाराष्ट्र आणि भारतभर उपलब्ध.</p>
-        <div class="btn-group">
-          <a href="products.html" class="btn btn-primary" data-mr="उत्पादने पहा" data-en="View Products">उत्पादने पहा</a>
-          <a href="https://wa.me/919922776592?text=Hi!%20I'm%20interested%20in%20A1%20Basundi%20Tea" target="_blank" class="btn btn-whatsapp" data-mr="WhatsApp वर ऑर्डर करा" data-en="Order on WhatsApp">WhatsApp वर ऑर्डर करा</a>
+    <div class="relative z-10 flex items-center min-h-screen px-4 sm:px-6 md:px-8 lg:px-12">
+        <div class="w-full max-w-2xl">
+
+            <span class="hero-badge inline-flex items-center gap-2 px-4 py-2 text-xs rounded-full">
+                इम्युनिटी बूस्टर • मूड चेंजर
+            </span>
+
+            <h1 class="mt-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-white">
+                A1 बासुंदी टी
+            </h1>
+
+            <p class="mt-3 text-base sm:text-lg md:text-xl italic text-white/90">
+                इम्युनिटी बूस्टर आणि मूड चेंजर टी... A1 बसुंदी टी!
+            </p>
+
+            <p class="mt-4 text-sm sm:text-base md:text-lg text-white/85 leading-relaxed">
+                शुद्ध, नैसर्गिक आणि प्रीमियम क्वालिटी चहा. महाराष्ट्र आणि भारतभर उपलब्ध.
+            </p>
+
+            <!-- Buttons -->
+            <div class="flex flex-col sm:flex-row gap-3 mt-6">
+                <a href="products.html"
+                    class="btn btn-primary px-6 py-3 rounded-full text-center w-full sm:w-auto">
+                    उत्पादने पहा
+                </a>
+
+                <a href="https://wa.me/919922776592?text=Hi!%20I'm%20interested%20in%20A1%20Basundi%20Tea"
+                    target="_blank"
+                    class="btn btn-whatsapp px-6 py-3 rounded-full text-center w-full sm:w-auto">
+                    WhatsApp वर ऑर्डर करा
+                </a>
+            </div>
+
+            <!-- Stats -->
+            <div class="grid grid-cols-3 gap-4 sm:gap-6 mt-8 pt-6 border-t border-white/20">
+
+                <div>
+                    <span class="block text-xl sm:text-2xl md:text-3xl font-bold text-white">
+                        50+
+                    </span>
+                    <span class="text-xs sm:text-sm text-white/70">
+                        वर्षांचा अनुभव
+                    </span>
+                </div>
+
+                <div>
+                    <span class="block text-xl sm:text-2xl md:text-3xl font-bold text-white">
+                        100%
+                    </span>
+                    <span class="text-xs sm:text-sm text-white/70">
+                        नैसर्गिक चहा
+                    </span>
+                </div>
+
+                <div>
+                    <span class="block text-xl sm:text-2xl md:text-3xl font-bold text-white">
+                        FSSAI
+                    </span>
+                    <span class="text-xs sm:text-sm text-white/70">
+                        प्रमाणित
+                    </span>
+                </div>
+
+            </div>
+
         </div>
-        <div class="hero-stats">
-          <div class="hero-stat-item">
-            <span class="hero-stat-value">50+</span>
-            <span class="hero-stat-label" data-mr="वर्षांचा अनुभव" data-en="Years Experience">वर्षांचा अनुभव</span>
-          </div>
-          <div class="hero-stat-item">
-            <span class="hero-stat-value">100%</span>
-            <span class="hero-stat-label" data-mr="नैसर्गिक चहा" data-en="Natural Tea">नैसर्गिक चहा</span>
-          </div>
-          <div class="hero-stat-item">
-            <span class="hero-stat-value">FSSAI</span>
-            <span class="hero-stat-label" data-mr="प्रमाणित" data-en="Certified">प्रमाणित</span>
-          </div>
-        </div>
-      </div>
     </div>
-  </section>
+
+</section>
 
   <!-- OUR STORY -->
   <section class="welcome section-alt">
